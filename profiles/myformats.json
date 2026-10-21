@@ -1,0 +1,9 @@
+{
+  "name": "my-custom-formats",
+  "formats": [
+    {"slot": "3840x2160@30", "name": "4K Scope",   "aspect": 2.35, "bitrate": 80},
+    {"slot": "2704x1520@60", "name": "2.7K Flat 60","aspect": 1.85, "bitrate": 60},
+    {"slot": "1920x1080@60", "name": "1080 Scope",  "aspect": 2.35, "bitrate": 45},
+    {"slot": "1920x1080@30", "name": "1080 HiBR",   "bitrate": 40}
+  ]
+}

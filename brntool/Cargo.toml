@@ -1,0 +1,13 @@
+[package]
+name = "brntool"
+version = "0.1.0"
+edition = "2021"
+description = "Inspect/unpack/repack iCatch SUNP BURN FILE firmware (DiCam850 SPHOST.BRN)"
+
+[[bin]]
+name = "brntool"
+path = "src/main.rs"
+
+[lib]
+name = "brntool"
+path = "src/lib.rs"

@@ -1,0 +1,11 @@
+target/
+__pycache__/
+*.BRN
+*.BROKEN
+*.OLD
+*.BIN
+*.bin
+*.FIF
+*.apk
+*.elf
+*.pkl

@@ -1,0 +1,7 @@
+{
+  "name": "customres-stretch-example",
+  "resolution": {
+    "2704x1520@60": {"width": 2560, "height": 1440}
+  },
+  "bitrate_mbit": { "2704x1520@60": 60 }
+}

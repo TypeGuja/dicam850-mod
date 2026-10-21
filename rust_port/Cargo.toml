@@ -1,0 +1,8 @@
+[package]
+name = "imx386"
+version = "0.1.0"
+edition = "2021"
+description = "Sony IMX386 sensor driver ported from DiCam850 rev4 firmware (unp_tg_sonyimx386-00.00.06)"
+
+[lib]
+path = "src/lib.rs"
