@@ -1,4 +1,4 @@
-"""Build SPHOST_rtcfg8.BRN: runtime SD-card config (formats + video ISO cap).
+"""Build SPHOST_rtcfg9.BRN: runtime SD-card config (formats + video ISO cap).
 
 usage: py -I build_rtcfg.py [base.BRN] [out.BRN]
 Patches (each checks the original bytes first, aborts on mismatch):
@@ -18,7 +18,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 BRNTOOL = os.path.join(ROOT, "brntool", "target", "release", "brntool.exe")
 BASE = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "patches", "SPHOST_smooth_br.BRN")
-OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "patches", "SPHOST_rtcfg8.BRN")
+OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "patches", "SPHOST_rtcfg9.BRN")
 HOOK = os.path.join(HERE, "hook.bin")
 
 IMG_OFF, VA0 = 0x4b8120, 0x40000000

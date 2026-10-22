@@ -16,7 +16,7 @@ from unicorn.arm_const import *
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-BRN = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "patches", "SPHOST_rtcfg8.BRN")
+BRN = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, "patches", "SPHOST_rtcfg9.BRN")
 CHART = open(os.path.join(ROOT, "firmware", "rev4_rores", "RO_RES", "IQ", "AEPCHART60HZ30F_AUTO.BIN"), "rb").read()
 IMG = open(BRN, "rb").read()[0x4B8120:]
 
@@ -286,6 +286,16 @@ mc.run_pv()
 print("   ", {k: (m0[k], v) for k, v in modes(mc.uc).items() if v != m0[k]}, captab(mc))
 mc.run_chart()
 mc.finish("sample cfg")
+
+print("[5b] trailing '# ...' comment is not read as MAXISO (rtcfg8 bug)")
+# rtcfg8 parsed "mode=1920,60,40,0   # 1080p 60" as MAXISO=1080 -> 60fps capped -> dark.
+mc = Machine(b"mode=1920,60,40,0        # 1080p 60\n"
+             b"mode=1920,30,30,0        # 1080p 30\n", fps=60)
+mc.run_pv()
+check(captab(mc) == [(0, 0), (0, 0)], f"comment digits ignored, no ISO cap {captab(mc)}")
+check(modes(mc.uc)[(1920, 60)] == (m0[(1920, 60)][0], 40), "1080p60 bitrate still applied")
+check(mc.run_chart() == stock_g, "60fps chart unchanged")
+mc.finish("trailing comment")
 
 print("[6] oversized file (>8192 B) is ignored but still freed")
 mc = Machine(b"mode=3840,30,90,235\n" + b"#" * 9000, fps=30)

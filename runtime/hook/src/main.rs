@@ -83,13 +83,15 @@ fn panic(_: &core::panic::PanicInfo) -> ! {
 }
 
 /// Parse up to 5 unsigned decimals on the line starting near `p` (any non-digit
-/// separates them; a newline ends the line). Returns how many were read.
+/// separates them; a newline or a `#` ends the line -- rtcfg8 read the digits of a
+/// trailing "# 1080p 60" comment as MAXISO=1080 and capped that fps). Returns how
+/// many were read.
 #[inline(never)]
 unsafe fn parse_nums(buf: *const u8, n: usize, mut p: usize, out: *mut u32) -> usize {
     let mut cnt = 0usize;
     while p < n && cnt < 5 {
         let c = *buf.add(p);
-        if c == b'\n' {
+        if c == b'\n' || c == b'#' {
             break;
         }
         if c.is_ascii_digit() {
